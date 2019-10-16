@@ -5,7 +5,7 @@ import os
 from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template
 
 from werkzeug.utils import secure_filename
-VERSION="1.2"
+VERSION="1.3"
 
 UPLOAD_FOLDER = '/opt/ist440/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
