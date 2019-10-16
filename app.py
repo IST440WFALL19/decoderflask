@@ -34,8 +34,9 @@ def upload_page():
             filename = secure_filename(file.filename)
             print app.config['UPLOAD_FOLDER']
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
+            imagetext = ocr(filename)
+            return render_template('index.html', title=imagetext, version=VERSION)
+            # return redirect(url_for('uploaded_file', filename=filename))
     else:
         return render_template('upload.html', title='Upload', version=VERSION)
 
@@ -43,6 +44,12 @@ def upload_page():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
+
+def ocr(file):
+    # Convert image to text
+    
+    # return Text
+    return "test string"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=3000)
