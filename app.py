@@ -3,6 +3,11 @@
 # http://flask.palletsprojects.com/en/1.0.x/patterns/fileuploads/
 import os
 from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template
+try:
+    from PIL import Image
+except ImportError:
+    import Image
+import pytesseract
 
 from werkzeug.utils import secure_filename
 VERSION="1.3"
@@ -45,11 +50,11 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
 
-def ocr(file):
+def ocr(imagefile):
     # Convert image to text
-    
+    return pytesseract.image_to_string(Image.open(imagefile))
     # return Text
-    return "test string"
+    # return "test string"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=3000)
