@@ -37,21 +37,12 @@ def upload_page():
             return redirect(url_for('uploaded_file',
                                     filename=filename))
     else:
-
-        body = """<p>Upload an image:</p> <form method=post enctype=multipart/form-data>
-  <input type="file" name="file">
-  <input type="submit" value="Upload">
-</form>
-"""
-        footer = ""
-    return header + body + footer
+        return render_template('upload.html', title='Upload', version=VERSION)
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
-
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=3000)
