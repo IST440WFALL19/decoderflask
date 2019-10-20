@@ -2,7 +2,10 @@
 # A very simple Flask Hello World app for you to get started with...
 # http://flask.palletsprojects.com/en/1.0.x/patterns/fileuploads/
 import os
-from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template
+from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template, session
+from secretpy import Caesar
+from secretpy import alphabets
+
 try:
     from PIL import Image
 except ImportError:
@@ -10,7 +13,7 @@ except ImportError:
 import pytesseract
 
 from werkzeug.utils import secure_filename
-VERSION="1.3"
+VERSION="1.4"
 
 UPLOAD_FOLDER = '/opt/ist440/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -21,7 +24,7 @@ app.config['VERSION'] = VERSION
 
 @app.route('/')
 def hello_world():
-    return render_template('index.html', title='Cracking The Code', version=VERSION)
+    return render_template('index.html', title='Cracking The Code', version=VERSION, login=False)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -40,7 +43,7 @@ def upload_page():
             print app.config['UPLOAD_FOLDER']
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             imagetext = ocr(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return render_template('index.html', title=imagetext, version=VERSION)
+            return render_template('index.html', title=imagetext, version=VERSION, login=False)
             # return redirect(url_for('uploaded_file', filename=filename))
     else:
         return render_template('upload.html', title='Upload', version=VERSION)

@@ -4,6 +4,15 @@
     </head>
     <body>
         <h1>Welcome</h1>
+        
+        {% if login %}
+        <form action="/login" method="post">
+        <p>Username: {{ input('username') }}</p>
+        <p>Passcode: {{ input('password', type='password') }}</p>
+        <input type=submit value=Login>
+        {% endif %}
+        
+        
 	<p>Nittany Technical Solutions - Cracking The Code. <a href="/upload/">Upload...</a></p>
 	<p>Version: {{ version }}</p>
     </body>
