@@ -18,13 +18,15 @@ VERSION="1.4"
 UPLOAD_FOLDER = '/opt/ist440/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
+pytesseract.pytesseract.tesseract_cmd = r'/opt/tesseract-4.1.0/src/vs2010/tesseract'
+
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['VERSION'] = VERSION
 
 @app.route('/')
 def hello_world():
-    return render_template('index.html', title='Cracking The Code', version=VERSION, login=False)
+    return render_template('index.html', title='Cracking The Code', version=VERSION, login=False, imagetext="")
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -40,10 +42,10 @@ def upload_page():
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            print app.config['UPLOAD_FOLDER']
+            print "Upload Folder: " + app.config['UPLOAD_FOLDER']
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             imagetext = ocr(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return render_template('index.html', title=imagetext, version=VERSION, login=False)
+            return render_template('index.html', title="Results", imagetext=imagetext, version=VERSION, login=False)
             # return redirect(url_for('uploaded_file', filename=filename))
     else:
         return render_template('upload.html', title='Upload', version=VERSION)
@@ -56,6 +58,8 @@ def uploaded_file(filename):
 def ocr(imagefile):
     # Convert image to text
     print imagefile
+    # store in database
+    # return the database record
     return pytesseract.image_to_string(Image.open(imagefile))
     # return Text
     # return "test string"
