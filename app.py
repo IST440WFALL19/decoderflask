@@ -52,7 +52,7 @@ def uploaded_file(filename):
 
 def ocr(imagefile):
     # Convert image to text
-    
+    print imagefile
     return pytesseract.image_to_string(Image.open(imagefile))
     # return Text
     # return "test string"
