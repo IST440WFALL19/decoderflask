@@ -13,12 +13,12 @@ except ImportError:
 import pytesseract
 
 from werkzeug.utils import secure_filename
-VERSION="1.4"
+VERSION="1.5"
 
 UPLOAD_FOLDER = '/opt/ist440/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-pytesseract.pytesseract.tesseract_cmd = r'/opt/tesseract-4.1.0/src/vs2010/tesseract'
+# pytesseract.pytesseract.tesseract_cmd = r'/opt/tesseract-4.1.0/src/vs2010/tesseract'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
