@@ -6,6 +6,15 @@ from flask import Flask, flash, request, redirect, url_for, send_from_directory,
 from secretpy import Caesar
 from secretpy import alphabets
 
+
+class codedMessage:
+    def __init__(self, imagefile):
+        self.image = imagefile
+        self.filepath, self.ext = os.path.splitext(imagefile)
+
+    def sef_type(self, extension):
+        self.ext = extension
+
 try:
     from PIL import Image
 except ImportError:
@@ -64,6 +73,12 @@ def results():
 def ocr(imagefile):
     # Convert image to text
     print imagefile
+    filename, file_extension = os.path.splitext(imagefile)
+
+
+    codemessage = codedMessage(imagefile)
+    codemessage.sef_type(file_extension)
+
     filename, file_extension = os.path.splitext(imagefile)
     
     if file_extension == ".pdf":
