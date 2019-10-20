@@ -13,7 +13,7 @@ except ImportError:
 import pytesseract
 
 from werkzeug.utils import secure_filename
-VERSION="1.6"
+VERSION="1.7"
 
 UPLOAD_FOLDER = '/opt/ist440/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -54,7 +54,13 @@ def upload_page():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
-
+                               
+                               
+@app.route('/results/')
+def results():
+    return render_template("results.html", title='Results', version=VERSION)
+           
+                               
 def ocr(imagefile):
     # Convert image to text
     print imagefile
@@ -71,3 +77,4 @@ def ocr(imagefile):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=3000)
+
