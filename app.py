@@ -13,7 +13,7 @@ except ImportError:
 import pytesseract
 
 from werkzeug.utils import secure_filename
-VERSION="1.5"
+VERSION="1.6"
 
 UPLOAD_FOLDER = '/opt/ist440/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -58,9 +58,14 @@ def uploaded_file(filename):
 def ocr(imagefile):
     # Convert image to text
     print imagefile
+    filename, file_extension = os.path.splitext(imagefile)
+    
+    if file_extension == ".pdf":
+        return pytesseract.image_to_pdf_or_hocr(imagefile, extension='pdf')
+    else:
+        return pytesseract.image_to_string(Image.open(imagefile))
     # store in database
     # return the database record
-    return pytesseract.image_to_string(Image.open(imagefile))
     # return Text
     # return "test string"
 
