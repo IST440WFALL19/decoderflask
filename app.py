@@ -39,7 +39,7 @@ def upload_page():
             filename = secure_filename(file.filename)
             print app.config['UPLOAD_FOLDER']
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            imagetext = ocr(filename)
+            imagetext = ocr(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return render_template('index.html', title=imagetext, version=VERSION)
             # return redirect(url_for('uploaded_file', filename=filename))
     else:
@@ -52,6 +52,7 @@ def uploaded_file(filename):
 
 def ocr(imagefile):
     # Convert image to text
+    
     return pytesseract.image_to_string(Image.open(imagefile))
     # return Text
     # return "test string"
