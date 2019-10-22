@@ -22,17 +22,18 @@ except ImportError:
 import pytesseract
 
 from werkzeug.utils import secure_filename
-VERSION="1.7"
+VERSION="1.8"
 
 UPLOAD_FOLDER = '/opt/ist440/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 grouppass = "IST440W"
-secretkey = "9g3fiuwgpqw8gp48h[08gp98GP*&O&D*I^UYGp[97gfo76fOIP&FO&^F]]"
+secretkey = "9g3fiuwgpqw8g8gp98GP*&O&D*I^UYGp[97gfo76fOIP&FO&^F]"
 pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['VERSION'] = VERSION
+app.secret_key = secretkey
 
 @app.route('/')
 def index():
