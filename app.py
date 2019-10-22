@@ -5,6 +5,25 @@ import os
 from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template, session, escape
 from secretpy import Caesar
 from secretpy import alphabets
+import ConfigParser
+
+# Parse Config
+config = ConfigParser.RawConfigParser()
+# If file exists
+if os.path.exists('decoder.cfg'):
+    # Logging config
+    config.read('decoder.cfg')
+    secretkey = config.get('server', 'sercretkey')
+    grouppass = config.get('server', 'grouppass')
+else:
+    # Creating new configuration file
+    config.add_section("server")
+    config.set('server',"sercretkey")
+    config.set('server',"grouppass")
+    with open('decoder.cfg', 'wb') as configfile:
+        config.write(configfile)
+    print("Config File Created. Please edit decoder.cfg and run again.")
+    exit(0)
 
 
 class codedMessage:
@@ -26,8 +45,8 @@ VERSION="1.8"
 
 UPLOAD_FOLDER = '/opt/ist440/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-grouppass = "IST440W"
-secretkey = "9g3fiuwgpqw8g8gp98GP*&O&D*I^UYGp[97gfo76fOIP&FO&^F]"
+# grouppass = "IST440W"
+# secretkey = "9g3fiuwgpqw8g8gp98GP*&O&D*I^UYGp[97gfo76fOIP&FO&^F]"
 pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'
 
 app = Flask(__name__)
@@ -102,13 +121,17 @@ def upload_page():
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
+    # If we have a user logged in
+    if 'username' in session:
+        return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
                                
                                
 @app.route('/results/')
 def results():
-    return render_template("results.html", title='Results', version=VERSION)
+    # If we have a user logged in
+    if 'username' in session:
+        return render_template("results.html", title='Results', version=VERSION)
            
                                
 def ocr(imagefile):
