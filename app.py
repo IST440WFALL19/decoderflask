@@ -42,7 +42,7 @@ except ImportError:
 import pytesseract
 
 from werkzeug.utils import secure_filename
-VERSION="1.8"
+VERSION="1.9"
 
 UPLOAD_FOLDER = '/opt/ist440/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
