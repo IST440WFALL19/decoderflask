@@ -2,6 +2,7 @@ from __future__ import print_function
 # A very simple Flask Hello World app for you to get started with...
 # http://flask.palletsprojects.com/en/1.0.x/patterns/fileuploads/
 import os
+from googletrans import Translator
 from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template, session, escape
 from secretpy import Caesar
 from secretpy import alphabets
@@ -113,7 +114,8 @@ def upload_page():
                 print("Upload Folder: " + app.config['UPLOAD_FOLDER'])
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 imagetext = ocr(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                return render_template('index.html', title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])))
+                transtext = translate(imagetext)
+                return render_template('index.html', transtext=transtext, title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])))
                 # return redirect(url_for('uploaded_file', filename=filename))
         else:
             return render_template('upload.html', title='Upload', version=VERSION,  username=str(escape(session['username'])))
@@ -155,7 +157,11 @@ def ocr(imagefile):
     # return the database record
     # return Text
     # return "test string"
-
+def translate(text):
+    translator = Translator()
+    return translator.translate(text, dest= en)
+    
+    
 if __name__ == "__main__":
     app.secret_key = secretkey
     app.run(host='0.0.0.0',port=3000)
