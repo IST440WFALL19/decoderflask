@@ -31,8 +31,9 @@ class codedMessage:
         self.image = imagefile
         self.filepath, self.ext = os.path.splitext(imagefile)
 
-    def sef_type(self, extension):
+    def set_type(self, extension):
         self.ext = extension
+
 
 try:
     from PIL import Image
@@ -123,17 +124,18 @@ def upload_page():
 def uploaded_file(filename):
     # If we have a user logged in
     if 'username' in session:
-        return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)
-                               
-                               
+        return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
+    else:
+        return redirect(url_for('index'))
+        
 @app.route('/results/')
 def results():
     # If we have a user logged in
     if 'username' in session:
         return render_template("results.html", title='Results', version=VERSION)
-           
-                               
+    else:
+        return redirect(url_for('index'))
+
 def ocr(imagefile):
     # Convert image to text
     print(imagefile)
