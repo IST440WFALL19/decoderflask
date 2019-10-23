@@ -143,7 +143,7 @@ def ocr(imagefile):
 
 
     codemessage = codedMessage(imagefile)
-    codemessage.sef_type(file_extension)
+    codemessage.set_type(file_extension)
 
     filename, file_extension = os.path.splitext(imagefile)
     
