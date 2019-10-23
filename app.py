@@ -157,9 +157,10 @@ def ocr(imagefile):
     # return the database record
     # return Text
     # return "test string"
+
 def translate(text):
     translator = Translator()
-    return translator.translate(text, dest= en)
+    return translator.translate(text, dest="en")
     
     
 if __name__ == "__main__":
