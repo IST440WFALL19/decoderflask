@@ -7,9 +7,13 @@
 	    <title>{{ title }} - {{ version }}</title>
     </head>
     <body>
+    	<p>Nittany Technical Solutions - Cracking The Code.</p>
+        
         {% if welcome %}
         <h1>Welcome {{ username }}.</h1>
+        <a href="/upload/">Upload image for decoding</a>
         {% endif %}
+        
         {% if not username %}
         <p>Welcome, Login:</a></p>
         {% endif %}
@@ -26,7 +30,6 @@
         {% endif %}
         
         
-	<p>Nittany Technical Solutions - Cracking The Code. <a href="/upload/">Upload...</a></p>
     
     
     {% if imagetext %}
