@@ -4,7 +4,7 @@
     </head>
     <body>
     {% if error %}
-	<p>Error: {{ version }}</p>
+	<p>Error: {{ error }}</p>
     {% endif %}
 	<p>Upload an image:</p> <form method=post enctype=multipart/form-data>
   	<input type="file" name="file">

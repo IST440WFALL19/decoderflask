@@ -3,8 +3,14 @@
 	    <title>{{ title }} - {{ version }}</title>
     </head>
     <body>
-		results
-		<p>Version: {{ version }}</p>
+		Results:
+        {% if imagetext %}
+    	    <p>ImageText: {{ imagetext }}</p>
+        {% endif %}
+    
+         {% if transtext %}
+    	    <p>Translated text: {{ transtext }}</p>
+        {% endif %}
     </body>
     <footer>
     {% if username %}
