@@ -61,7 +61,7 @@ def index():
     # If we have a user logged in
     if 'username' in session:
         # return home with welcome
-        return render_template('index.html', username=str(escape(session['username'])), welcome="true")
+        return render_template('index.html', username=str(escape(session['username'])), welcome="true",version=VERSION)
     # else return home with login page
     return render_template('index.html', title='Cracking The Code', version=VERSION, login=True, imagetext="")
     
