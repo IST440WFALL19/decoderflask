@@ -9,7 +9,7 @@
     <body>
     	<p>Nittany Technical Solutions - Cracking The Code.</p>
         
-        {% if welcome %}
+        {% if username %}
         <h1>Welcome {{ username }}.</h1>
         <a href="/upload/">Upload image for decoding</a>
         {% endif %}
@@ -19,7 +19,7 @@
         {% endif %}
         
         {% if login == "failed" %}
-        <p>Failed.</p>
+        <p>Failed. Please try again...</p>
         {% endif %}
         
         {% if login %}
