@@ -8,6 +8,12 @@ from secretpy import Caesar
 from secretpy import alphabets
 import ConfigParser
 
+try:
+    from PIL import Image
+except ImportError:
+    import Image
+import pytesseract
+
 # Parse Config
 config = ConfigParser.RawConfigParser()
 # If file exists
@@ -36,11 +42,7 @@ class codedMessage:
         self.ext = extension
 
 
-try:
-    from PIL import Image
-except ImportError:
-    import Image
-import pytesseract
+
 
 from werkzeug.utils import secure_filename
 VERSION="1.9"
