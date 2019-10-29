@@ -115,7 +115,9 @@ def upload_page():
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 imagetext = ocr(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 transtext = translate(imagetext)
-                return render_template('index.html', transtext=transtext, title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])))
+                return render_template('upload.html', transtext=transtext, title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])))
+            else:
+                return render_template('upload.html', error="Image Format Not Supported.", title='Cracking The Code', version=VERSION, login=False,  username=str(escape(session['username'])))
                 # return redirect(url_for('uploaded_file', filename=filename))
         else:
             return render_template('upload.html', title='Upload', version=VERSION,  username=str(escape(session['username'])))
