@@ -169,7 +169,15 @@ def ocr(imagefile):
 def translate(text):
     translator = Translator()
     return translator.translate(text, dest="en")
-    
+
+def caesar_decipher(caesartext):
+    results_array = []
+    for key in range(1,27):
+        cm = CryptMachine(Caesar(), key)
+        cm = SaveSpaces(cm)
+        results_array.append(cm.decrypt(caesartext))
+    return results_array
+
     
 if __name__ == "__main__":
     app.secret_key = secretkey
