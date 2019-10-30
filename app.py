@@ -120,7 +120,7 @@ def upload_page():
                 transorigin = transtext.text
                 transsrc = transtext.src
                 transdest = transtext.dest
-                returntext = "origin: {0}   src: {1}    dest: {2}     ".format(transorigin, transsrc,transdest)
+                returntext = "origin: {0}   </ br > src: {1}  </ br >  dest: {2}     ".format(transorigin, transsrc,transdest)
                 return render_template('results.html', transtext=returntext, title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])))
             else:
                 return render_template('upload.html', error="Image Format Not Supported.", title='Cracking The Code', version=VERSION, login=False,  username=str(escape(session['username'])))
