@@ -123,6 +123,10 @@ def upload_page():
                 transorigin = transtext.text
                 transsrc = transtext.src
                 transdest = transtext.dest
+                
+                # Run background task
+                # deleted_action = q.enqueue(ocr,filepath)
+                
                 #returntext = "origin: {0}   </ br > src: {1}  </ br >  dest: {2}     ".format(transorigin, transsrc,transdest)
                 return render_template('results.html', transsrc=transsrc, transdest=transdest, transwords=transorigin, title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])))
             else:
