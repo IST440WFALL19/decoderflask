@@ -7,6 +7,8 @@ from flask import Flask, flash, request, redirect, url_for, send_from_directory,
 from secretpy import Caesar
 from secretpy import alphabets
 import ConfigParser
+from redis import Redis
+import rq
 
 try:
     from PIL import Image
@@ -42,6 +44,7 @@ class codedMessage:
         self.ext = extension
 
 
+q = rq.Queue(connection=Redis.from_url('redis://:83uaf_1313n_3r3-wfbu3bsih3-23urbkjbfu3b@128.118.192.79:6379/0'))
 
 
 from werkzeug.utils import secure_filename
