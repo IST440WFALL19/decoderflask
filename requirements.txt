@@ -1,0 +1,21 @@
+-e git+https://git.psu.edu/sysman/python-besapi.git@f26107b4063c50efa463cd7ddc804bdcc870f78a#egg=besapi
+certifi==2019.9.11
+chardet==3.0.4
+Click==7.0
+Flask==1.1.1
+googletrans==2.4.0
+idna==2.8
+itsdangerous==1.1.0
+Jinja2==2.10.3
+lxml==4.4.1
+MarkupSafe==1.1.1
+Pillow==6.2.0
+pytesseract==0.3.0
+redis==3.3.11
+requests==2.22.0
+rq==1.1.0
+secretpy==0.8.0
+urllib3==1.25.6
+uWSGI==2.0.18
+Werkzeug==0.16.0
+yampy==1.0

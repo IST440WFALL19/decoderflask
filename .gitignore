@@ -1,2 +1,4 @@
+.DS_Store
+uploads/*
 *.pyc
-decoder.cfg
+venv/src/besapi
