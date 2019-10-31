@@ -132,51 +132,68 @@ def upload_page():
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
+    '''This function shows the filename after an upload'''
     # If we have a user logged in
     if 'username' in session:
+        # Return the image from the app directory
         return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
     else:
+        # Return to index for non-logged in user
         return redirect(url_for('index'))
         
 @app.route('/results/')
 def results():
+    '''This page will show the results of the iamge'''
     # If we have a user logged in
     if 'username' in session:
+        # Return the results html
         return render_template("results.html", title='Results', version=VERSION)
     else:
+        # Return to index for non-logged in user
         return redirect(url_for('index'))
 
 def ocr(imagefile):
-    # Convert image to text
-    print(imagefile)
-    filename, file_extension = os.path.splitext(imagefile)
-
-
-    codemessage = codedMessage(imagefile)
-    codemessage.set_type(file_extension)
-
+    '''Function to convert image to text'''
+    # Split the filename and extension
     filename, file_extension = os.path.splitext(imagefile)
     
+    # Create new codedMesssage object with image path
+    codemessage = codedMessage(imagefile)
+    # Set the codedMessage type based on file_extension
+    codemessage.set_type(file_extension)
+    # Attempt to OCR based on file extension
     if file_extension == ".pdf":
+        # PDF requires different function
         return pytesseract.image_to_pdf_or_hocr(imagefile, extension='pdf')
     else:
+        # Attempt to OCR image file
         return pytesseract.image_to_string(Image.open(imagefile))
-    # store in database
-    # return the database record
-    # return Text
-    # return "test string"
 
 def translate(text):
+    '''Function to translate text to english'''
+    # Create new translator
     translator = Translator()
+    # Return the translated text in English
     return translator.translate(text, dest="en")
 
 def caesar_decipher(caesartext):
+    '''Function to attempt caesar decipher by cycling through each number'''
+    # Create Empty Array
     results_array = []
+    # Set text we received to lowercase
+    lowercase_text = caesartext.lower()
+    # For 1 through 27
     for key in range(1,27):
+        # Create new CryptMachine with Caesar cipher and key
         cm = CryptMachine(Caesar(), key)
+        # Set the cm to save the spaces in the string
         cm = SaveSpaces(cm)
-        results_array.append(cm.decrypt(caesartext))
+        # Add each decipher attempt to the results_array
+        results_array.append(cm.decrypt(lowercase_text))
+    # return the array of decipher attempts
     return results_array
+    # This return could be replaced with a function to test each result and return 
+    # the result with the most english words found and return that single result
 
     
 if __name__ == "__main__":
