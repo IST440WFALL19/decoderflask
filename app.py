@@ -150,7 +150,7 @@ def uploaded_file(filename):
         
 @app.route('/results/')
 def results():
-    '''This page will show the results of the iamge'''
+    '''This page will show the results of the image'''
     # If we have a user logged in
     if 'username' in session:
         # Return the results html
