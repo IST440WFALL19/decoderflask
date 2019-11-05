@@ -198,9 +198,7 @@ def caesar_decipher(caesartext):
     # For 1 through 27
     for key in range(1,27):
         # Create new CryptMachine with Caesar cipher and key
-        cm = CryptMachine(Caesar(), key)
-        # Set the cm to save the spaces in the string
-        cm = SaveSpaces(cm)
+        cm = SaveSpaces(SaveCase(CryptMachine(Caesar(), key)))
         # Add each decipher attempt to the results_array
         results_array.append(cm.decrypt(lowercase_text))
     # return the array of decipher attempts
@@ -215,6 +213,7 @@ def caesar_decipher(caesartext):
 def rot13_decipher(rot13text):
     # Create CryptMachine for Rot13 with saving case and space on
     cm = SaveSpaces(SaveCase(CryptMachine(Rot13())))
+    print(rot13text)
     dec = cm.decrypt(rot13text)
     print(dec)
     return dec
