@@ -185,6 +185,7 @@ def ocr(imagefile):
         output_text = pytesseract.image_to_string(Image.open(imagefile))
     # Remove line endings so we have a single string
     return_text = "".join(e.replace('\n',' ') for e in output_text)
+    print("ocr: {0}".format(return_text))
     return return_text
 
 def translate(text):
