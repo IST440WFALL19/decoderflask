@@ -215,7 +215,7 @@ def rot13_decipher(rot13text):
     # Create CryptMachine for Rot13 with saving case and space on
     cm = SaveSpaces(SaveCase(CryptMachine(Rot13())))
     dec = cm.decrypt(rot13text)
-    print dec
+    print(dec)
     return dec
 
 if __name__ == "__main__":
