@@ -4,7 +4,7 @@ from __future__ import print_function
 import os
 from googletrans import Translator
 from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template, session, escape
-from secretpy import Caesar, Rot13, alphabets
+from secretpy import Caesar, Rot13, alphabets, CryptMachine
 from secretpy.cmdecorators import SaveCase, SaveSpaces
 import ConfigParser
 from redis import Redis
