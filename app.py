@@ -131,7 +131,7 @@ def upload_page():
                 rot13output = rot13_decipher(imagetext)
                 # Run background task
                 # deleted_action = q.enqueue(ocr,filepath)
-                
+                caesaroutput = caesar_decipher(imagetext)
                 #returntext = "origin: {0}   </ br > src: {1}  </ br >  dest: {2}     ".format(transorigin, transsrc,transdest)
                 return render_template('results.html', transsrc=transsrc, transdest=transdest, transwords=transorigin, title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])))
             else:
@@ -203,6 +203,10 @@ def caesar_decipher(caesartext):
         # Add each decipher attempt to the results_array
         results_array.append(cm.decrypt(lowercase_text))
     # return the array of decipher attempts
+    for result in results_array:
+        print("result: {0}".format(result))
+        if translate(result).src.lower() == "en":
+            print("English!")
     return results_array
     # This return could be replaced with a function to test each result and return 
     # the result with the most english words found and return that single result
