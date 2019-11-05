@@ -174,13 +174,18 @@ def ocr(imagefile):
     codemessage = codedMessage(imagefile)
     # Set the codedMessage type based on file_extension
     codemessage.set_type(file_extension)
+    
+    output_text = ""
     # Attempt to OCR based on file extension
     if file_extension == ".pdf":
         # PDF requires different function
-        return pytesseract.image_to_pdf_or_hocr(imagefile, extension='pdf')
+        output_text = pytesseract.image_to_pdf_or_hocr(imagefile, extension='pdf')
     else:
         # Attempt to OCR image file
-        return pytesseract.image_to_string(Image.open(imagefile))
+        output_text = pytesseract.image_to_string(Image.open(imagefile))
+    # Remove line endings so we have a single string
+    return_text = "".join(e.strip('\n') for e in output_text)
+    return return_text
 
 def translate(text):
     '''Function to translate text to english'''
@@ -214,6 +219,7 @@ def rot13_decipher(rot13text):
     # Create CryptMachine for Rot13 with saving case and space on
     cm = SaveSpaces(SaveCase(CryptMachine(Rot13())))
     print(rot13text)
+
     dec = cm.decrypt(rot13text)
     print(dec)
     return dec
