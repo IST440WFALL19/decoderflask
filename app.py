@@ -4,8 +4,7 @@ from __future__ import print_function
 import os
 from googletrans import Translator
 from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template, session, escape
-from secretpy import Caesar
-from secretpy import alphabets
+from secretpy import Caesar, Rot13, alphabets
 import ConfigParser
 from redis import Redis
 import rq
@@ -118,12 +117,18 @@ def upload_page():
                 filename = secure_filename(file.filename)
                 print("Upload Folder: " + app.config['UPLOAD_FOLDER'])
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                # Translate image to text with OCR function
                 imagetext = ocr(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                # Translate the image text to english
                 transtext = translate(imagetext)
+                # Get output of text (best guess)
                 transorigin = transtext.text
+                # Get original language of text
                 transsrc = transtext.src
+                # Get language translaged to (En)
                 transdest = transtext.dest
-                
+                # Try a rot13 decipher
+                rot13output = rot13_decipher(imagetext)
                 # Run background task
                 # deleted_action = q.enqueue(ocr,filepath)
                 
@@ -202,7 +207,13 @@ def caesar_decipher(caesartext):
     # This return could be replaced with a function to test each result and return 
     # the result with the most english words found and return that single result
 
-    
+def rot13_decipher(rot13text):
+    # Create CryptMachine for Rot13 with saving case and space on
+    cm = SaveSpaces(SaveCase(CryptMachine(Rot13())))
+    dec = cm.decrypt(rot13text)
+    print dec
+    return dec
+
 if __name__ == "__main__":
     app.secret_key = secretkey
     app.run(host='0.0.0.0',port=3000)
