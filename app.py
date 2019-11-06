@@ -265,6 +265,8 @@ def rot13_decipher(rot13text):
 
 if __name__ == "__main__":
     app.secret_key = secretkey
+    print(app.template_folder)
+    print(app.static_folder)
     app.run(host='0.0.0.0',port=3000)
 
 
