@@ -197,7 +197,7 @@ def englishMatch(sentance):
     # Check for words in word list
     with open(WORD_LIST) as f:
         # For each word in the sentance
-        for word in sentance.split()
+        for word in sentance.split():
             if word in f.read():
                 print("true")
                 # Add to total matched english words
