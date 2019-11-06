@@ -264,7 +264,6 @@ def rot13_decipher(rot13text):
     return dectext
 
 if __name__ == "__main__":
-    app.secret_key = secretkey
     print(app.template_folder)
     # app.static_folder="static"
     print(app.static_folder)
