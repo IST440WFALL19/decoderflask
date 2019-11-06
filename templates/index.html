@@ -29,17 +29,10 @@
 
          
 
-        {% if not username %} 
-
-        <div class = "ex1"><h2>Login:</a></h2> 
-
-        {% endif %} 
-
-         
 
         {% if login == "failed" %} 
 
-        <p>Failed. Please try again...</p> 
+        <p>Failed. Please try again...</p>
 
         {% endif %} 
 
@@ -47,7 +40,8 @@
 
         {% if login %} 
 
-        <form action="/login" method="post"> 
+        <div class = "ex1"> <form action="/login" method="post"> 
+	    <h2>Login:</a></h2> 
 
         <p>Username: {{ input('username') }}</p> 
 
