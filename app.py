@@ -131,10 +131,11 @@ def upload_page():
                 transdest = transtext.dest
                 # Try a rot13 decipher
                 rot13output = rot13_decipher(imagetext)
+                print("rot13 output: {0}".format(rot13output))
                 # Run background task
                 # deleted_action = q.enqueue(ocr,filepath)
                 caesaroutput = caesar_decipher(imagetext)
-                print("Found caesar match: {0}".format(caesaroutput))
+                print("Found caesar matchs: {0}".format(caesaroutput))
                 #returntext = "origin: {0}   </ br > src: {1}  </ br >  dest: {2}     ".format(transorigin, transsrc,transdest)
                 return render_template('results.html', transsrc=transsrc, transdest=transdest, transwords=transorigin, title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])))
             else:
@@ -250,7 +251,9 @@ def rot13_decipher(rot13text):
     print("rot13 enc: {0}".format(rot13text))
     dectext = cm.decrypt(rot13text)
     print("rot13 dec: {0}".format(dectext))
-    return dectext
+    if englishMatch(dectext) > 80:
+        return dectext
+    return ""
 
 if __name__ == "__main__":
     app.secret_key = secretkey
