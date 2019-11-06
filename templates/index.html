@@ -1,0 +1,80 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<link rel="stylesheet" type="text/css" href="mystyle.css"> 
+
+<title>{{ title }} - {{ version }}</title> 
+</head> 
+<body> 
+
+{% macro input(name, value='', type='text', size=20) -%} 
+
+    <input type="{{ type }}" name="{{ name }}" value="{{ 
+
+        value|e }}" size="{{ size }}"> 
+
+{%- endmacro %} 
+
+    <body> 
+
+    <h1>Nittany Technical Solutions - Cracking The Code</h1> 
+
+         
+
+        {% if username %} 
+
+        <h2>Welcome {{ username }}</h2> 
+
+        <div class="ex1"><p><a href="/upload/">Upload image for decoding</a></p></div> 
+
+        {% endif %} 
+
+         
+
+        {% if no username %} 
+
+        <div class = "ex1"><h2>Login:</a></h2> 
+
+        {% endif %} 
+
+         
+
+        {% if login == "failed" %} 
+
+        <p>Failed. Please try again...</p> 
+
+        {% endif %} 
+
+         
+
+        {% if login %} 
+
+        <form action="/login" method="post"> 
+
+        <p>Username: {{ input('username') }}</p> 
+
+        <p>Passcode: {{ input('password', type='password')}}</p>  
+
+        <p><input type=submit value=Login></div></p> 
+
+        {% endif %} 
+
+     
+
+    </body> 
+
+    <footer> 
+
+    {% if username %} 
+
+    <h3>Welcome {{ username }}</h3> 
+
+        <p><a href ="/logout">Logout</a></p> 
+
+    {% endif %} 
+
+<h3>Version: {{ version }}</h3> 
+
+    </footer> 
+
+</html> 
