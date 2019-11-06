@@ -239,8 +239,8 @@ def rot13_decipher(rot13text):
     cm = SaveSpaces(SaveCase(CryptMachine(Rot13())))
     print("rot13 enc: {0}".format(rot13text))
     dectext = cm.decrypt(rot13text)
-    print("rot13 dec: {0}".format(dec))
-    return dec
+    print("rot13 dec: {0}".format(dectext))
+    return dectext
 
 if __name__ == "__main__":
     app.secret_key = secretkey
