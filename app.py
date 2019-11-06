@@ -134,6 +134,7 @@ def upload_page():
                 # Run background task
                 # deleted_action = q.enqueue(ocr,filepath)
                 caesaroutput = caesar_decipher(imagetext)
+                print("Found caesar match: {0}".format(caesaroutput))
                 #returntext = "origin: {0}   </ br > src: {1}  </ br >  dest: {2}     ".format(transorigin, transsrc,transdest)
                 return render_template('results.html', transsrc=transsrc, transdest=transdest, transwords=transorigin, title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])))
             else:
@@ -231,10 +232,12 @@ def caesar_decipher(caesartext):
         results_array.append(cm.decrypt(lowercase_text))
     # return the array of decipher attempts
     for result in results_array:
-        print("result: {0}".format(result))
+        # print("result: {0}".format(result))
         if englishMatch(result) > 80:
             print("English!")
-    return results_array
+            return result
+    # Return empty result if we don't find english
+    return ""
     # This return could be replaced with a function to test each result and return 
     # the result with the most english words found and return that single result
 
