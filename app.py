@@ -193,7 +193,7 @@ def ocr(imagefile):
 def englishMatch(sentance):
     # Get number of words in the list
     total_num_words = len(sentance.split())
-    total_match = 0
+    total_match = 0.0
     # For each word in the sentance
     for word in sentance.split():
         print("Checking word: {0}".format(word))
