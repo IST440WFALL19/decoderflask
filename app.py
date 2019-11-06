@@ -196,15 +196,15 @@ def englishMatch(sentance):
     total_match = 0.0
     # For each word in the sentance
     for word in sentance.split():
-        print("Checking word: {0}".format(word))
+        # print("Checking word: {0}".format(word))
         # Check for words in word list
         with open(WORD_LIST) as f:
             if word in f.read():
-                print("true: {0}".format(word))
+                # print("true: {0}".format(word))
                 # Add to total matched english words
                 total_match += 1
-    print("total number words: {0}".format(total_num_words))
-    print("total matched words: {0}".format(total_match))
+    # print("total number words: {0}".format(total_num_words))
+    # print("total matched words: {0}".format(total_match))
     # return the percentage of english words
     matchpercent = (total_match/total_num_words) * 100
     print("englishMatch: {0}".format(matchpercent))
@@ -232,7 +232,7 @@ def caesar_decipher(caesartext):
     # return the array of decipher attempts
     for result in results_array:
         print("result: {0}".format(result))
-        if englishMatch(result) > 30:
+        if englishMatch(result) > 80:
             print("English!")
     return results_array
     # This return could be replaced with a function to test each result and return 
