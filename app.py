@@ -220,7 +220,8 @@ def translate(text):
 
 def caesar_decipher(caesartext):
     '''Function to attempt caesar decipher by cycling through each number'''
-    # Create Empty Array
+    # Create Empty Arrays
+    decipher_attempt = []
     results_array = []
     # Set text we received to lowercase
     lowercase_text = caesartext.lower()
@@ -229,15 +230,17 @@ def caesar_decipher(caesartext):
         # Create new CryptMachine with Caesar cipher and key
         cm = SaveSpaces(SaveCase(CryptMachine(Caesar(), key)))
         # Add each decipher attempt to the results_array
-        results_array.append(cm.decrypt(lowercase_text))
+        decipher_attempt.append(cm.decrypt(lowercase_text))
     # return the array of decipher attempts
-    for result in results_array:
+    for result in decipher_attempt:
         # print("result: {0}".format(result))
+        # If the match is greater than 80 percent
         if englishMatch(result) > 80:
-            print("English!")
-            return result
+            # print("English!")
+            # Add to results array
+            results_array.append(result)
     # Return empty result if we don't find english
-    return ""
+    return results_array
     # This return could be replaced with a function to test each result and return 
     # the result with the most english words found and return that single result
 
