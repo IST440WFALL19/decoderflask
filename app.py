@@ -237,8 +237,8 @@ def caesar_decipher(caesartext):
 def rot13_decipher(rot13text):
     # Create CryptMachine for Rot13 with saving case and space on
     cm = SaveSpaces(SaveCase(CryptMachine(Rot13())))
-    print("rot13 enc: {0}".format(rot13text)
-    dec = cm.decrypt(rot13text)
+    print("rot13 enc: {0}".format(rot13text))
+    dectext = cm.decrypt(rot13text)
     print("rot13 dec: {0}".format(dec))
     return dec
 
