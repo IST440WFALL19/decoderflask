@@ -249,15 +249,15 @@ def rot13_decipher(rot13text):
     # Create CryptMachine for Rot13 with saving case and space on
     cm = SaveSpaces(SaveCase(CryptMachine(Rot13())))
     # print("rot13 enc: {0}".format(rot13text))
+    dectext = ""
     try:
         dectext = cm.decrypt(rot13text)
     except:
         print("Error decrypting rot13 text: {0}".format(dectext))
-        dectext = ""
     # print("rot13 dec: {0}".format(dectext))
     if englishMatch(dectext) > 80:
         return dectext
-    return ""
+    return dectext
 
 if __name__ == "__main__":
     app.secret_key = secretkey
