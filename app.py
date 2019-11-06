@@ -198,8 +198,9 @@ def englishMatch(sentance):
     with open(WORD_LIST) as f:
         # For each word in the sentance
         for word in sentance.split():
+            print("Checking word: {0}".format(word))
             if word in f.read():
-                print("true")
+                print("true: {0}".format(word))
                 # Add to total matched english words
                 total_match += 1
     # return the percentage of english words
