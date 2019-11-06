@@ -186,10 +186,10 @@ def ocr(imagefile):
     else:
         # Attempt to OCR image file
         output_text = pytesseract.image_to_string(Image.open(imagefile))
-    print("ocr: {0}".format(output_text))
+    # print("ocr: {0}".format(output_text))
     # Remove line endings so we have a single string
     return_text = "".join(e.replace('\n',' ').replace('\r',' ') for e in output_text)
-    print("ocr: {0}".format(return_text))
+    # print("ocr: {0}".format(return_text))
     return return_text
 
 def englishMatch(sentance):
@@ -209,7 +209,7 @@ def englishMatch(sentance):
     # print("total matched words: {0}".format(total_match))
     # return the percentage of english words
     matchpercent = (total_match/total_num_words) * 100
-    print("englishMatch: {0}".format(matchpercent))
+    # print("englishMatch: {0}".format(matchpercent))
     return matchpercent
     
 def translate(text):
@@ -248,9 +248,9 @@ def caesar_decipher(caesartext):
 def rot13_decipher(rot13text):
     # Create CryptMachine for Rot13 with saving case and space on
     cm = SaveSpaces(SaveCase(CryptMachine(Rot13())))
-    print("rot13 enc: {0}".format(rot13text))
+    # print("rot13 enc: {0}".format(rot13text))
     dectext = cm.decrypt(rot13text)
-    print("rot13 dec: {0}".format(dectext))
+    # print("rot13 dec: {0}".format(dectext))
     if englishMatch(dectext) > 80:
         return dectext
     return ""
