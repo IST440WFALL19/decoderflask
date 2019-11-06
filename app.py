@@ -203,12 +203,13 @@ def englishMatch(sentance):
                 print("true: {0}".format(word))
                 # Add to total matched english words
                 total_match += 1
+    print("total number words: {0}".format(total_num_words)
+    print("total matched words: {0}".format(total_match))
     # return the percentage of english words
     matchpercent = (total_match/total_num_words) * 100
-    print("englishMatch: {0}".format(matchpercent)
+    print("englishMatch: {0}".format(matchpercent))
     return matchpercent
-                
-                
+    
 def translate(text):
     '''Function to translate text to english'''
     # Create new translator
