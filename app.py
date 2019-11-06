@@ -52,6 +52,7 @@ VERSION="1.9"
 
 UPLOAD_FOLDER = '/opt/ist440/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+WORD_LIST = '/opt/ist440/wordlists/word-list-raw.txt'
 # grouppass = "IST440W"
 # secretkey = "9g3fiuwgpqw8g8gp98GP*&O&D*I^UYGp[97gfo76fOIP&FO&^F]"
 pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'
@@ -183,11 +184,28 @@ def ocr(imagefile):
     else:
         # Attempt to OCR image file
         output_text = pytesseract.image_to_string(Image.open(imagefile))
+    print("ocr: {0}".format(output_text))
     # Remove line endings so we have a single string
-    return_text = "".join(e.replace('\n',' ') for e in output_text)
+    return_text = "".join(e.replace('\n',' ').replace('\r',' ') for e in output_text)
     print("ocr: {0}".format(return_text))
     return return_text
 
+def englishMatch(sentance):
+    # Get number of words in the list
+    total_num_words = len(sentance.split())
+    total_match = 0
+    # Check for words in word list
+    with open(WORD_LIST) as f:
+        # For each word in the sentance
+        for word in sentance.split()
+            if word in f.read():
+                print("true")
+                # Add to total matched english words
+                total_match += 1
+    # return the percentage of english words
+    return (total_match/total_num_words) * 100
+                
+                
 def translate(text):
     '''Function to translate text to english'''
     # Create new translator
@@ -210,7 +228,7 @@ def caesar_decipher(caesartext):
     # return the array of decipher attempts
     for result in results_array:
         print("result: {0}".format(result))
-        if translate(result).src.lower() == "en":
+        if englishMatch(result) > 30:
             print("English!")
     return results_array
     # This return could be replaced with a function to test each result and return 
@@ -219,10 +237,9 @@ def caesar_decipher(caesartext):
 def rot13_decipher(rot13text):
     # Create CryptMachine for Rot13 with saving case and space on
     cm = SaveSpaces(SaveCase(CryptMachine(Rot13())))
-    print(rot13text)
-
+    print("rot13 enc: {0}".format(rot13text)
     dec = cm.decrypt(rot13text)
-    print(dec)
+    print("rot13 dec: {0}".format(dec))
     return dec
 
 if __name__ == "__main__":
