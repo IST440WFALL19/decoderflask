@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/mystyle.css') }}">
 <title>{{ title }} - {{ version }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mystyle.css') }}">
 </head>
 <body>
 
@@ -35,14 +35,15 @@
 
         {% if login %}
 
-        <div class = "ex1"> <form action="/login" method="post">
+        <div class = "ex1"> 
 	    <h2>Login:</a></h2>
 
+        <form action="/login" method="post">
         <p>Username: {{ input('username') }}</p>
 
         <p>Passcode: {{ input('password', type='password')}}</p>
 
-        <p><input type=submit value=Login></div></p>
+        <p><input type=submit value=Login></p></div>
 
         {% endif %}
 

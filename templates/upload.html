@@ -1,48 +1,48 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-<link rel="stylesheet" type="text/css" href="static/css/mystyle.css"> 
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="static/css/mystyle.css">
 
-<title>{{ title }} - {{ version }}</title> 
-</head> 
-<body> 
+<title>{{ title }} - {{ version }}</title>
+</head>
+<body>
 
-{% if error %} 
+{% if error %}
 
-         
 
-<div class="ex1"><h2>Error:</h2> <p>{{ error }}</p></div> 
 
-           
+<div class="ex1"><h2>Error:</h2> <p>{{ error }}</p></div>
 
-{% endif %} 
 
- <div class="ex1"><h2>Upload an image: 
 
-        <br><br> <form method=post enctype=multipart/form-data> 
+{% endif %}
 
-     <input type="file" name="file"> 
+ <div class="ex1"><h2>Upload an image:
 
-      <input type="submit" value="Upload"></h2>  
+        <br><br> <form method=post enctype=multipart/form-data>
 
-    </form></div> 
+     <input type="file" name="file">
 
-             
+      <input type="submit" value="Upload"></h2>
 
-    </body> 
+    </form></div>
 
-    <footer> 
 
-    {% if username %} 
 
-   <h3>Welcome {{ username }}</h3>   
+    </body>
 
-       <p><a href ="/logout"> Logout</a></p>     
+    <footer>
 
-    {% endif %} 
+    {% if username %}
 
-<h3>Version: {{ version }} </h3> 
+   <h3>Welcome {{ username }}</h3>
 
-    </footer> 
+       <p><a href ="/logout"> Logout</a></p>
 
-</html> 
+    {% endif %}
+
+<h3>Version: {{ version }} </h3>
+
+    </footer>
+
+</html>
