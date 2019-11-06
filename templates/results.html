@@ -1,23 +1,48 @@
-<html>
-    <head>
-	    <title>{{ title }} - {{ version }}</title>
-    </head>
-    <body>
-		Results:
-        {% if imagetext %}
-    	    <p>ImageText: {{ imagetext }}</p>
-        {% endif %}
-    
-         {% if transwords %}
-    	    <p>Translated text: {{ transwords }}</p> 
-			<p> Source text: {{ transsrc }}</p>
-			<p> Destination: {{ transdest }}</p>
-        {% endif %}
-    </body>
-    <footer>
-    {% if username %}
-    <p><a href ="/upload">Upload</a> - Welcome {{ username }}. <a href ="/logout">Logout.</a></p>
-    {% endif %}
-	<p>Version: {{ version }}</p>
-    </footer>
-</html>
+<!DOCTYPE html> 
+<html> 
+<head> 
+<link rel="stylesheet" type="text/css" href="mystyle.css"> 
+
+<title>{{ title }} - {{ version }}</title> 
+</head> 
+<body> 
+
+<h1>Results:</h1> 
+
+        {% if imagetext %} 
+
+        <h2>ImageText: {{ imagetext }}</h2> 
+
+        {% endif %} 
+
+     
+
+         {% if transwords %} 
+
+       <h2>Translated text: {{ transwords }}</h2>  
+
+<h2> Source text: {{ transsrc }}</h2> 
+
+<h2> Destination: {{ transdest }}</h2> 
+
+        {% endif %} 
+
+    </body> 
+
+    <footer> 
+
+    {% if username %} 
+
+    <p><a href ="/upload">Upload</a></p>  
+
+        <p><a href ="/logout">Logout</a></p> 
+
+    {% endif %} 
+
+        <h3>Welcome {{   username }} </h3> 
+
+<h3>Version: {{ version }}</h3> 
+
+    </footer> 
+
+</html> 

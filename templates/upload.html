@@ -1,20 +1,22 @@
-<html>
-    <head>
-	    <title>{{ title }} - {{ version }}</title>
-    </head>
-    <body>
-    {% if error %}
-	<p>Error: {{ error }}</p>
-    {% endif %}
-	<p>Upload an image:</p> <form method=post enctype=multipart/form-data>
-  	<input type="file" name="file">
- 	 <input type="submit" value="Upload">
-	</form>
-    </body>
-    <footer>
-    {% if username %}
-    <p>Welcome {{ username }}. <a href ="/logout">Logout.</a></p>
-    {% endif %}
-	<p>Version: {{ version }}</p>
-    </footer>
-</html>
+<!DOCTYPE html>  <html>  <head>  <link rel="stylesheet" type="text/css" href="mystyle.css"> 
+<title>{{ title }} - {{ version }}</title>  </head>  <body> 
+{% if error %} 
+         
+<div class="ex1"><h2>Error:</h2> <p>{{ error }}</p></div> 
+           
+{% endif %} 
+ <div class="ex1"><h2>Upload an image: 
+        <br><br> <form method=post enctype=multipart/form-data> 
+     <input type="file" name="file"> 
+      <input type="submit" value="Upload"></h2>  
+    </form></div> 
+             
+    </body> 
+    <footer> 
+    {% if username %} 
+   <h3>Welcome {{ username }}</h3>   
+       <p><a href ="/logout"> Logout</a></p>     
+    {% endif %} 
+<h3>Version: {{ version }} </h3> 
+    </footer> 
+</html> 
