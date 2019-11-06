@@ -1,72 +1,67 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/mystyle.css') }}"> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mystyle.css') }}">
+<title>{{ title }} - {{ version }}</title>
+</head>
+<body>
 
-<title>{{ title }} - {{ version }}</title> 
-</head> 
-<body> 
+{% macro input(name, value='', type='text', size=20) -%}
 
-{% macro input(name, value='', type='text', size=20) -%} 
+<input type="{{ type }}" name="{{ name }}" value="{{ value|e }}" size="{{ size }}">
 
-    <input type="{{ type }}" name="{{ name }}" value="{{ value|e }}" size="{{ size }}"> 
+{%- endmacro %}
 
-{%- endmacro %} 
+    <h1>Nittany Technical Solutions - Cracking The Code</h1>
 
-    <body> 
+        {% if username %}
 
-    <h1>Nittany Technical Solutions - Cracking The Code</h1> 
+        <h2>Welcome {{ username }}</h2>
 
-         
+        <div class="ex1"><p><a href="/upload/">Upload image for decoding</a></p></div>
 
-        {% if username %} 
-
-        <h2>Welcome {{ username }}</h2> 
-
-        <div class="ex1"><p><a href="/upload/">Upload image for decoding</a></p></div> 
-
-        {% endif %} 
-
-         
+        {% endif %}
 
 
-        {% if login == "failed" %} 
+
+
+        {% if login == "failed" %}
 
         <p>Failed. Please try again...</p>
 
-        {% endif %} 
+        {% endif %}
 
-         
 
-        {% if login %} 
 
-        <div class = "ex1"> <form action="/login" method="post"> 
-	    <h2>Login:</a></h2> 
+        {% if login %}
 
-        <p>Username: {{ input('username') }}</p> 
+        <div class = "ex1"> <form action="/login" method="post">
+	    <h2>Login:</a></h2>
 
-        <p>Passcode: {{ input('password', type='password')}}</p>  
+        <p>Username: {{ input('username') }}</p>
 
-        <p><input type=submit value=Login></div></p> 
+        <p>Passcode: {{ input('password', type='password')}}</p>
 
-        {% endif %} 
+        <p><input type=submit value=Login></div></p>
 
-     
+        {% endif %}
 
-    </body> 
 
-    <footer> 
 
-    {% if username %} 
+    </body>
 
-    <h3>Welcome {{ username }}</h3> 
+    <footer>
 
-        <p><a href ="/logout">Logout</a></p> 
+    {% if username %}
 
-    {% endif %} 
+    <h3>Welcome {{ username }}</h3>
 
-<h3>Version: {{ version }}</h3> 
+        <p><a href ="/logout">Logout</a></p>
 
-    </footer> 
+    {% endif %}
 
-</html> 
+<h3>Version: {{ version }}</h3>
+
+    </footer>
+
+</html>
