@@ -7,10 +7,6 @@ try:
 except:
     pass
 
-BES_ROOT_SERVER = "https://bes.win.psu.edu:52311"
-BES_USER_NAME = "rusty"
-BES_PASSWORD = "eac32bY20"
-
 def ocr(imagefile):
     '''Function to convert image to text'''
     # Split the filename and extension
@@ -32,15 +28,15 @@ def count_words_at_url(url):
     resp = requests.get(url)
     return len(resp.text.split())
 
-def deleteAction(actionID):
+def deleteAction(actionID,BES_USER_NAME, BES_PASSWORD, BES_ROOT_SERVER):
     B = besapi.BESConnection(BES_USER_NAME, BES_PASSWORD, BES_ROOT_SERVER)
-    return B.delete('action/' + actionID)
+    return B.delete('action/{0}'.format(actionID))
 
-def haltAction(actionID):
+def haltAction(actionID,BES_USER_NAME, BES_PASSWORD, BES_ROOT_SERVER):
     B = besapi.BESConnection(BES_USER_NAME, BES_PASSWORD, BES_ROOT_SERVER)
-    return B.post('action/' + actionID + '/stop', '')
+    return B.post('action/{0}/stop'.format(actionID), '')
     
-def postYammer(token,message,ostype,debug,sysman_group_id):
+def postYammer(token,message,ostype,publish,debug,sysman_group_id):
     # print "YAMMER"
     # print "YAMMER MESSAGE\n" + message
     #     print "YAMMER TOPICS: " + ostype
@@ -59,11 +55,11 @@ def postYammer(token,message,ostype,debug,sysman_group_id):
     # post under Software Sharing Notifications Service using token
     yammer = yampy.Yammer(access_token=token)
     # UNCOMMENT TO POST TO YAMMER
+    if publish:
+        yammer.messages.create(message, group_id=sysman_group_id,topics=yammer_topic_list)
     if debug:
         print("DEBUG: YAMMER")
         print(message)
-    else:
-        yammer.messages.create(message, group_id=sysman_group_id,topics=yammer_topic_list)
 
 def stripName(name):
     # Strip the system type from the BigFix task name:
@@ -97,14 +93,14 @@ def stripName(name):
     return clean_name,availability
 
 
-# SysManDev Division in PSU site
-targetSysManDev = '(member of group 1141605 of site \"CustomSite_PSU\")'
-targetSysManStaff = "((exists true whose (if true then (member of group 1954980 of site \"actionsite\") else false)) AND (exists true whose (if true then (exists file \"Staff.ag\" of parent folder of client) else false)))"
+# # SysManDev Division in PSU site
+# targetSysManDev = '(member of group 1141605 of site \"CustomSite_PSU\")'
+# targetSysManStaff = "((exists true whose (if true then (member of group 1954980 of site \"actionsite\") else false)) AND (exists true whose (if true then (exists file \"Staff.ag\" of parent folder of client) else false)))"
+#
+# actionTargets = {"targetSysManStaff":targetSysManStaff, "targetSysManDev":targetSysManDev}
 
-actionTargets = {"targetSysManStaff":targetSysManStaff, "targetSysManDev":targetSysManDev}
 
-
-def startAction(root,siteRelevance):
+def startAction(root,siteRelevance,actionTargets,BES_USER_NAME, BES_PASSWORD, BES_ROOT_SERVER):
     """This function takes a Task XML and converts it into a singleaction"""
     B = besapi.BESConnection(BES_USER_NAME, BES_PASSWORD, BES_ROOT_SERVER)
     relevance = []
@@ -218,4 +214,3 @@ def startAction(root,siteRelevance):
     # print("\nCreated New Action: {0} - {1}\n".format(str(new_action().Action.Name), str(new_action().Action.ID)))
     resultsArray = [str(new_action().Action.Name), str(new_action().Action.ID)]
     return resultsArray
-
