@@ -129,6 +129,8 @@ def upload_page():
                 transsrc = transtext.src
                 # Get language translaged to (En)
                 transdest = transtext.dest
+                
+                # TODO Before sending the text to the deciphering functions, we should pull out all of the numbers so it's just A-Z, a-z left.
                 # Try a rot13 decipher
                 rot13output = rot13_decipher(imagetext)
                 print("rot13 output: {0}".format(rot13output))
