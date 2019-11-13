@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ title }} - {{ version }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-
-{% macro input(name, value='', type='text', size=20) -%}
-<input type="{{ type }}" name="{{ name }}" value="{{ value|e }}" size="{{ size }}">
-{%- endmacro %}
-
-<h1>Nittany Technical Solutions - Cracking The Code</h1>
+{% extends "layout.html" %}
+{% block content %}
 
 {% if username %}
     <h2>Welcome {{ username }}</h2>
@@ -30,14 +19,4 @@
     <p><input type=submit value=Login></p></div>
 {% endif %}
 
-
-</body>
-<footer>
-{% if username %}
-    <h3>Welcome {{ username }}</h3>
-    <p><a href ="/logout">Logout</a></p>
-{% endif %}
-<h3>Version: {{ version }}</h3>
-</footer>
-
-</html>
+{% endblock %}

@@ -5,44 +5,43 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body> 
+<body>
+{% block content %}
+    <div class="container">
+        {% if current_user.is_authenticated %}
+        {% with tasks = current_user.get_tasks_in_progress() %}
+        {% if tasks %}
+            {% for task in tasks %}
+            <div class="alert alert-success" role="alert">
+                {{ task.description }}
+                <span id="{{ task.id }}-progress">{{ task.get_progress() }}</span>%
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% endif %}
+        ...
+{% endblock %}
 
-<h1>Results:</h1> 
+<h1>Results:</h1>
+{% if imagetext %}
+    <h2>ImageText: {{ imagetext }}</h2>
+{% endif %}
 
-        {% if imagetext %} 
+ {% if transwords %}
+    <h2>Translated text: {{ transwords }}</h2>
+    <h2> Source text: {{ transsrc }}</h2>
+    <h2> Destination: {{ transdest }}</h2>
+{% endif %}
+</body>
 
-        <h2>ImageText: {{ imagetext }}</h2> 
+<footer>
+{% if username %}
+    <p><a href ="/upload">Upload</a></p>
+    <p><a href ="/logout">Logout</a></p>
+    <h3>Welcome {{ username }} </h3>
+{% endif %}
+<h3>Version: {{ version }}</h3>
+</footer>
 
-        {% endif %} 
-
-     
-
-         {% if transwords %} 
-
-       <h2>Translated text: {{ transwords }}</h2>  
-
-<h2> Source text: {{ transsrc }}</h2> 
-
-<h2> Destination: {{ transdest }}</h2> 
-
-        {% endif %} 
-
-    </body> 
-
-    <footer> 
-
-    {% if username %} 
-
-    <p><a href ="/upload">Upload</a></p>  
-
-        <p><a href ="/logout">Logout</a></p> 
-
-    {% endif %} 
-
-        <h3>Welcome {{   username }} </h3> 
-
-<h3>Version: {{ version }}</h3> 
-
-    </footer> 
-
-</html> 
+</html>

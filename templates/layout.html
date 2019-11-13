@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }} - {{ version }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+{% macro input(name, value='', type='text', size=20) -%}
+<input type="{{ type }}" name="{{ name }}" value="{{ value|e }}" size="{{ size }}">
+{%- endmacro %}
+
+<h1>Nittany Technical Solutions - Cracking The Code</h1>
+
+{% block content %}{% endblock %}
+
+</body>
+
+<footer>
+{% if username %}
+    <p><a href ="/upload">Upload</a></p>
+    <p><a href ="/logout">Logout</a></p>
+    <h3>Welcome {{ username }} </h3>
+{% endif %}
+<h3>Version: {{ version }}</h3>
+</footer>
+
+
+</html>
