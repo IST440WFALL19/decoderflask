@@ -51,7 +51,7 @@ from werkzeug.utils import secure_filename
 VERSION="1.9"
 
 UPLOAD_FOLDER = '/opt/ist440/uploads'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg'])
 WORD_LIST = '/opt/ist440/wordlists/word-list-raw.txt'
 # grouppass = "IST440W"
 # secretkey = "9g3fiuwgpqw8g8gp98GP*&O&D*I^UYGp[97gfo76fOIP&FO&^F]"
@@ -61,6 +61,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['VERSION'] = VERSION
 app.secret_key = secretkey
+
 
 @app.route('/')
 def index():
@@ -100,10 +101,6 @@ def logout():
     session.pop('username', None)
     # Return home page
     return redirect(url_for('index'))
-    
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/upload/', methods=['GET', 'POST'])
 def upload_page():
@@ -169,6 +166,11 @@ def results():
     else:
         # Return to index for non-logged in user
         return redirect(url_for('index'))
+
+def allowed_file(filename):
+    """Check file extension to ensure we can process it"""
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def ocr(imagefile):
     '''Function to convert image to text'''
