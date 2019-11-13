@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ title }} - {{ version }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+{% extends "layout.html" %}
 
-<body>
 {% block content %}
     <div class="container">
         {% if current_user.is_authenticated %}
@@ -21,7 +15,6 @@
         {% endwith %}
         {% endif %}
         ...
-{% endblock %}
 
 <h1>Results:</h1>
 {% if imagetext %}
@@ -33,15 +26,5 @@
     <h2> Source text: {{ transsrc }}</h2>
     <h2> Destination: {{ transdest }}</h2>
 {% endif %}
-</body>
-
-<footer>
-{% if username %}
-    <p><a href ="/upload">Upload</a></p>
-    <p><a href ="/logout">Logout</a></p>
-    <h3>Welcome {{ username }} </h3>
-{% endif %}
-<h3>Version: {{ version }}</h3>
-</footer>
-
-</html>
+    <p><a href ="/upload">Upload Again</a></p>
+{% endblock %}
