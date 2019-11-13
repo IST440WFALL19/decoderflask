@@ -118,6 +118,7 @@ def upload_page():
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 # Translate image to text with OCR function
                 imagetext = ocr(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
                 # Translate the image text to english
                 transtext = translate(imagetext)
                 # Get output of text (best guess)
@@ -200,6 +201,11 @@ def englishMatch(sentance):
     # Get number of words in the list
     total_num_words = len(sentance.split())
     total_match = 0.0
+    
+    # translate sentance here
+    # check output translation for english words
+    
+    # if translate is also matches words below
     # For each word in the sentance
     for word in sentance.split():
         # print("Checking word: {0}".format(word))
