@@ -9,6 +9,7 @@ from secretpy.cmdecorators import SaveCase, SaveSpaces
 import ConfigParser
 from redis import Redis
 import rq
+import sqlite3
 
 try:
     from PIL import Image
