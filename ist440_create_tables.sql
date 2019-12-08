@@ -61,19 +61,71 @@ create table code_crack.main.cipher_text if not exists (
 	cipher_text string 
 ); 
 
+--translate language
+drop table code_crack.main.image_translate_language
 
+create table code_crack.main.image_translate_language if not exists ( 
+	image_language_id integer primary key asc autoincrement, 
+	ciphertext_id integer references code_crack.main.cipher_text(ciphertext_id), 
+	received_from_module_id integer references code_crack.main.zref_modules(module_id), 
+	date_added timestamp, 
+	date_updated timestamp, 
+	original_language string, 
+	converted_language string, 
+	language_technique_cd integer references code_crack.main.zref_language_technique(language_technique_cd)
+); 
 
+--caesar
+drop table code_crack.main.caesar_decryption
 
+create table code_crack.main.caesar_decryption if not exists ( 
+	caesar_id integer primary key asc autoincrement, 
+	image_language_id integer references code_crack.main.image_translate_language(image_language_id), 
+	received_from_module_id integer references code_crack.main.zref_modules(module_id), 
+	caesar_decryption string, 
+	date_added timestamp, 
+	date_updated timestamp, 
+	decryption_technique_cd integer references code_crack.main.zref_decryption_technique(decryption_technique_cd)
+); 
 
+--rot 13
+drop table code_crack.main.rot_13_decipher;
 
+create table code_crack.main.rot_13_decipher if not exists ( 
+	rot_13_decipher_id integer primary key asc autoincrement, 
+	image_language_id integer references code_crack.main.image_translate_language(image_language_id), 
+	received_from_module_id integer references code_crack.main.zref_modules(module_id), 
+	rot_13_decipher string, 
+	date_added timestamp, 
+	date_updated timestamp, 
+	decryption_technique_cd integer references code_crack.main.zref_decryption_technique(decryption_technique_cd)
+); 
 
+--substitution
+drop table code_crack.main.substitution_decipher;
 
+create table code_crack.main.substitution_decipher if not exists ( 
+	substitution_decipher_id integer primary key asc autoincrement, 
+	image_language_id integer references code_crack.main.image_translate_language(image_language_id), 
+	received_from_module_id integer references code_crack.main.zref_modules(module_id), 
+	substitution_decipher string, 
+	date_added timestamp, 
+	date_updated timestamp, 
+	decryption_technique_cd integer references code_crack.main.zref_decryption_technique(decryption_technique_cd)
+); 
 
+--transpose
+drop table code_crack.main.transposition_decipher;
 
-
-
-
-
+create table code_crack.main.transposition_decipher if not exists ( 
+	transposition_decipher_id integer primary key asc autoincrement, 
+	image_language_id integer references code_crack.main.image_translate_language(image_language_id), 
+	received_from_module_id integer references code_crack.main.zref_modules(module_id), 
+	transposition_decipher string, 
+	date_added timestamp, 
+	date_updated timestamp, 
+	decryption_technique_cd integer references code_crack.main.zref_decryption_technique(decryption_technique_cd)
+); 
 
 --zref_security_level
 drop table code_crack.main.zref_security_level; 
@@ -90,6 +142,26 @@ drop table code_crack.main.zref_modules;
 
 create table code_crack.main.zref_modules if not exists (
 	module_id integer primary key asc, 
+	name string, 
+	date_added timestamp, 
+	date_updated timestamp
+); 
+
+--zref_language_technique
+drop table code_crack.main.zref_language_technique; 
+
+create table code_crack.main.zref_language_technique if not exists (
+	language_technique_cd integer primary key asc, 
+	name string, 
+	date_added timestamp, 
+	date_updated timestamp
+); 
+
+--zref_decryption_technique
+drop table code_crack.main.zref_decryption_technique; 
+
+create table code_crack.main.zref_decryption_technique if not exists (
+	decryption_technique_cd integer primary key asc, 
 	name string, 
 	date_added timestamp, 
 	date_updated timestamp
