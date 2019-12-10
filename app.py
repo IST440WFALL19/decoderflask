@@ -230,17 +230,19 @@ def englishMatch(sentance):
     # if translate is also matches words below
     # For each word in the sentance
     for word in en_sentance.split():
-        print("Checking word: {0}".format(word))
-        # Check for words in word list
-        with open(WORD_LIST) as f:
-            if word in f.read():
-                # print("true: {0}".format(word))
-                # Add to total matched english words
-                total_match += 1
+        try:
+            print("Checking word: {0}".format(word))
+            # Check for words in word list
+            with open(WORD_LIST) as f:
+                if word in f.read():
+                    # print("true: {0}".format(word))
+                    # Add to total matched english words
+                    total_match += 1
+        except:
+            pass
     # print("total number words: {0}".format(total_num_words))
     # print("total matched words: {0}".format(total_match))
     # return the percentage of english words
-    try:
         matchpercent = (total_match/total_num_words) * 100
     except ZeroDivisionError:
         matchpercent = 0.0
