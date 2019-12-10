@@ -8,9 +8,32 @@
 {% endif %}
 
  {% if transwords %}
-    <h2>Translated text: {{ transwords }}</h2>
-    <h2> Source text: {{ transsrc }}</h2>
-    <h2> Destination: {{ transdest }}</h2>
+ <table>
+     <tr>
+         <th>Translated Text</th>
+         <th>Source Language</th>
+         <th>Destination Language</th>
+     </tr>
+     <tr>
+         <th>{{ transwords }}</th>
+         <th>{{ transsrc }}</th>
+         <th>{{ transdest }}</th>
+     </tr>
+ </table>
 {% endif %}
-    <p><a href ="/upload">Upload Again</a></p>
+
+{% if rot13_output %}
+<table>
+    <tr>
+        <th>rot13</th>
+        <th>Caesar</th>
+    </tr>
+    <tr>
+        <th>{{ rot13_output }}</th>
+        <th>{{ caesar_output }}</th>
+    </tr>
+</table>
+{% endif %}
+
+<p><a href ="/upload">Upload Again</a></p>
 {% endblock %}
