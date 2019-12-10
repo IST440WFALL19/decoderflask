@@ -49,7 +49,7 @@ q = rq.Queue(connection=Redis.from_url('redis://:83uaf_1313n_3r3-wfbu3bsih3-23ur
 
 
 from werkzeug.utils import secure_filename
-VERSION="1.9"
+VERSION="2.0"
 
 UPLOAD_FOLDER = '/opt/ist440/uploads'
 ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg'])
@@ -132,13 +132,18 @@ def upload_page():
                 # print("transtext: {}".format(transtext))
                 # TODO Before sending the text to the deciphering functions, we should pull out all of the numbers so it's just A-Z, a-z, special chars left.
                 cleantext = " ".join(re.findall(r"[a-zA-Z0-9]+", imagetext))
-                # Try a rot13 decipher
-                rot13output = rot13_decipher(cleantext)
-                print("rot13 output: {0}".format(rot13output))
-                # Run background task
-                # deleted_action = q.enqueue(ocr,filepath)
-                caesaroutput = caesar_decipher(cleantext)[0]
-                print("Found caesar matchs: {0}".format(caesaroutput))
+                try:
+                    # Try a rot13 decipher
+                    rot13output = rot13_decipher(cleantext)
+                    print("rot13 output: {0}".format(rot13output))
+                except:
+                    rot13output = ""
+
+                try:
+                    caesaroutput = caesar_decipher(cleantext)[0]
+                    print("Found caesar matchs: {0}".format(caesaroutput))
+                except:
+                    caesaroutput = ""
                 
                 # Translate the caeser text to english
                 caesartranstext = translate(caesaroutput)
