@@ -1,7 +1,7 @@
 from __future__ import print_function
 # A very simple Flask Hello World app for you to get started with...
 # http://flask.palletsprojects.com/en/1.0.x/patterns/fileuploads/
-import os
+import os, re
 from googletrans import Translator
 from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template, session, escape
 from secretpy import Caesar, Rot13, alphabets, CryptMachine
@@ -128,8 +128,9 @@ def upload_page():
                 transsrc = transtext.src
                 # Get language translaged to (En)
                 transdest = transtext.dest
-                
-                # TODO Before sending the text to the deciphering functions, we should pull out all of the numbers so it's just A-Z, a-z left.
+                print("transtext: {}".format(transtext))
+                # TODO Before sending the text to the deciphering functions, we should pull out all of the numbers so it's just A-Z, a-z, special chars left.
+                cleantext = " ".join(re.findall(r"[a-zA-Z0-9]+", k))
                 # Try a rot13 decipher
                 rot13output = rot13_decipher(imagetext)
                 print("rot13 output: {0}".format(rot13output))
