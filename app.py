@@ -243,6 +243,7 @@ def englishMatch(sentance):
     # print("total number words: {0}".format(total_num_words))
     # print("total matched words: {0}".format(total_match))
     # return the percentage of english words
+    try:
         matchpercent = (total_match/total_num_words) * 100
     except ZeroDivisionError:
         matchpercent = 0.0
