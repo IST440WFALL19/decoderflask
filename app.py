@@ -271,7 +271,8 @@ def caesar_decipher(caesartext):
     for result in decipher_attempt:
         # print("result: {0}".format(result))
         # If the match is greater than 80 percent
-        if englishMatch(result) > 80:
+        # translate result to english first, then check
+        if englishMatch(translate(result).text) > 80:
             # print("English!")
             # Add to results array
             results_array.append(result)
@@ -290,7 +291,7 @@ def rot13_decipher(rot13text):
     except:
         print("Error decrypting rot13 text: {0}".format(dectext))
     # print("rot13 dec: {0}".format(dectext))
-    if englishMatch(dectext) > 80:
+    if englishMatch(translate(dectext).text) > 80:
         return dectext
     return dectext
 
