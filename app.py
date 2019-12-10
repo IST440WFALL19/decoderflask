@@ -120,14 +120,15 @@ def upload_page():
                 # Translate image to text with OCR function
                 imagetext = ocr(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-                # Translate the image text to english
-                transtext = translate(imagetext)
-                # Get output of text (best guess)
-                transorigin = transtext.text
-                # Get original language of text
-                transsrc = transtext.src
-                # Get language translaged to (En)
-                transdest = transtext.dest
+                # # Translate the image text to english
+                # transtext = translate(imagetext)
+                # # Get output of text (best guess)
+                # transorigin = transtext.text
+                # # Get original language of text
+                # transsrc = transtext.src
+                # # Get language translaged to (En)
+                # transdest = transtext.dest
+
                 print("transtext: {}".format(transtext))
                 # TODO Before sending the text to the deciphering functions, we should pull out all of the numbers so it's just A-Z, a-z, special chars left.
                 cleantext = " ".join(re.findall(r"[a-zA-Z0-9]+", transtext.text))
@@ -140,16 +141,24 @@ def upload_page():
                 print("Found caesar matchs: {0}".format(caesaroutput))
                 
                 # Translate the caeser text to english
-                transtext = translate(caesaroutput)
+                caesartranstext = translate(caesaroutput)
                 # Get output of text (best guess)
-                transorigin = transtext.text
+                caesartransorigin = caesartranstext.text
                 # Get original language of text
-                transsrc = transtext.src
+                caesartranssrc = caesartranstext.src
                 # Get language translaged to (En)
-                transdest = transtext.dest
+                caesartransdest = caesartranstext.dest
+                
+                rot13transtext = translate(rot13output)
+                # Get output of text (best guess)
+                rot13transorigin = rot13transtext.text
+                # Get original language of text
+                rot13transsrc = rot13transtext.src
+                # Get language translaged to (En)
+                rot13transdest = rot13transtext.dest
                 
                 #returntext = "origin: {0}   </ br > src: {1}  </ br >  dest: {2}     ".format(transorigin, transsrc,transdest)
-                return render_template('results.html', transsrc=transsrc, transdest=transdest, transwords=transorigin, title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])), rot13_output=rot13output, caesar_output=caesaroutput)
+                return render_template('results.html', caesartranssrc=caesartranssrc, caesartransdest=caesartransdest, caesartranswords=caesartransorigin, rot13transsrc=rot13transsrc, rot13transdest=rot13transdest, rot13transwords=rot13transorigin, title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])), rot13_output=rot13output, caesar_output=caesaroutput)
             else:
                 return render_template('upload.html', error="Image Format Not Supported.", title='Cracking The Code', version=VERSION, login=False,  username=str(escape(session['username'])))
                 # return redirect(url_for('uploaded_file', filename=filename))

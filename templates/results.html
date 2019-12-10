@@ -30,23 +30,41 @@
 {% endif %}
 <br/>
 <br/>
-{% if transwords %}
+{% if caesartranswords %}
 <h2>Caeser Translation Results</h2>
 <table>
  <tr>
      <th>Translated Text</th>
-     <th>{{ transwords }}</th>
+     <th>{{ caesartranswords }}</th>
  </tr>
  <tr>
      <th>Source Language</th>
-     <th>{{ transsrc }}</th>
+     <th>{{ caesartranssrc }}</th>
  </tr>
  <tr>
      <th>Destination Language</th>
-     <th>{{ transdest }}</th>
+     <th>{{ caesartransdest }}</th>
  </tr>
 </table>
 {% endif %}
-
+<br />
+<br />
+{% if rot13transwords %}
+<h2>Rot13 Translation Results</h2>
+<table>
+ <tr>
+     <th>Translated Text</th>
+     <th>{{ rot13transwords }}</th>
+ </tr>
+ <tr>
+     <th>Source Language</th>
+     <th>{{ rot13transsrc }}</th>
+ </tr>
+ <tr>
+     <th>Destination Language</th>
+     <th>{{ rot13transdest }}</th>
+ </tr>
+</table>
+{% endif %}
 <p><a href ="/upload">Upload Again</a></p>
 {% endblock %}
