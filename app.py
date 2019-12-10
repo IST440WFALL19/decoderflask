@@ -135,7 +135,7 @@ def upload_page():
                 print("rot13 output: {0}".format(rot13output))
                 # Run background task
                 # deleted_action = q.enqueue(ocr,filepath)
-                caesaroutput = caesar_decipher(imagetext)
+                caesaroutput = caesar_decipher(imagetext)[0]
                 print("Found caesar matchs: {0}".format(caesaroutput))
                 #returntext = "origin: {0}   </ br > src: {1}  </ br >  dest: {2}     ".format(transorigin, transsrc,transdest)
                 return render_template('results.html', transsrc=transsrc, transdest=transdest, transwords=transorigin, title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])), rot13_output=rot13output, caesar_output=caesaroutput)

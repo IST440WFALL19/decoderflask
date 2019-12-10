@@ -4,32 +4,39 @@
 
 <h1>Results:</h1>
 {% if imagetext %}
-    <h2>ImageText: {{ imagetext }}</h2>
+<table>
+    <tr>
+        <th>OCR ImageText Results:</th>
+        <th>{{ imagetext }}</th>
+    </tr>
+</table>
 {% endif %}
 
- {% if transwords %}
- <table>
-     <tr>
-         <th>Translated Text</th>
-         <th>Source Language</th>
-         <th>Destination Language</th>
-     </tr>
-     <tr>
-         <th>{{ transwords }}</th>
-         <th>{{ transsrc }}</th>
-         <th>{{ transdest }}</th>
-     </tr>
- </table>
+{% if transwords %}
+<table>
+ <tr>
+     <th>Translated Text</th>
+     <th>{{ transwords }}</th>
+ </tr>
+ <tr>
+     <th>Source Language</th>
+     <th>{{ transsrc }}</th>
+ </tr>
+ <tr>
+     <th>Destination Language</th>
+     <th>{{ transdest }}</th>
+ </tr>
+</table>
 {% endif %}
 
 {% if rot13_output %}
 <table>
     <tr>
-        <th>rot13</th>
+        <th>Rot13:</th>
         <th>{{ rot13_output }}</th>
     </tr>
     <tr>
-        <th>Caesar</th>
+        <th>Caesar:</th>
         <th>{{ caesar_output }}</th>
     </tr>
 </table>
