@@ -273,7 +273,7 @@ def caesar_decipher(caesartext):
         decipher_attempt.append(cm.decrypt(lowercase_text))
     # return the array of decipher attempts
     for result in decipher_attempt:
-        # print("result: {0}".format(result))
+        print("result: {0}".format(result))
         # If the match is greater than 80 percent
         if englishMatch(result) > 80:
             # print("English!")
