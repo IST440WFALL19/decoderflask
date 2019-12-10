@@ -275,7 +275,7 @@ def caesar_decipher(caesartext):
     for result in decipher_attempt:
         print("result: {0}".format(result))
         # If the match is greater than 80 percent
-        if englishMatch(result) > 80:
+        if englishMatch(result) > 60:
             # print("English!")
             # Add to results array
             results_array.append(result)
