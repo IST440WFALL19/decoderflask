@@ -225,10 +225,11 @@ def englishMatch(sentance):
     
     # translate sentance here
     # check output translation for english words
+    en_sentance = translate(sentance).text
     
     # if translate is also matches words below
     # For each word in the sentance
-    for word in sentance.split():
+    for word in en_sentance.split():
         # print("Checking word: {0}".format(word))
         # Check for words in word list
         with open(WORD_LIST) as f:
@@ -269,10 +270,9 @@ def caesar_decipher(caesartext):
         decipher_attempt.append(cm.decrypt(lowercase_text))
     # return the array of decipher attempts
     for result in decipher_attempt:
-        # print("result: {0}".format(result))
+        print("result: {0}".format(result))
         # If the match is greater than 80 percent
-        # translate result to english first, then check
-        if englishMatch(translate(result).text) > 80:
+        if englishMatch(result) > 80:
             # print("English!")
             # Add to results array
             results_array.append(result)
@@ -291,7 +291,7 @@ def rot13_decipher(rot13text):
     except:
         print("Error decrypting rot13 text: {0}".format(dectext))
     # print("rot13 dec: {0}".format(dectext))
-    if englishMatch(translate(dectext).text) > 80:
+    if englishMatch(dectext) > 80:
         return dectext
     return dectext
 
