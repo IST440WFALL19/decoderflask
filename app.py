@@ -129,7 +129,7 @@ def upload_page():
                 # # Get language translaged to (En)
                 # transdest = transtext.dest
 
-                print("transtext: {}".format(transtext))
+                # print("transtext: {}".format(transtext))
                 # TODO Before sending the text to the deciphering functions, we should pull out all of the numbers so it's just A-Z, a-z, special chars left.
                 cleantext = " ".join(re.findall(r"[a-zA-Z0-9]+", transtext.text))
                 # Try a rot13 decipher
