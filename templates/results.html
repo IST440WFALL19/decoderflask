@@ -4,6 +4,7 @@
 
 <h1>Results:</h1>
 {% if imagetext %}
+<h2>OCR Results</h2>
 <table>
     <tr>
         <th>OCR ImageText Results:</th>
@@ -11,8 +12,26 @@
     </tr>
 </table>
 {% endif %}
+<br/>
+<br/>
 
+{% if rot13_output %}
+<h2>Decipher Results</h2>
+<table>
+    <tr>
+        <th>Rot13:</th>
+        <th>{{ rot13_output }}</th>
+    </tr>
+    <tr>
+        <th>Caesar:</th>
+        <th>{{ caesar_output }}</th>
+    </tr>
+</table>
+{% endif %}
+<br/>
+<br/>
 {% if transwords %}
+<h2>Translation Results</h2>
 <table>
  <tr>
      <th>Translated Text</th>
@@ -26,19 +45,6 @@
      <th>Destination Language</th>
      <th>{{ transdest }}</th>
  </tr>
-</table>
-{% endif %}
-
-{% if rot13_output %}
-<table>
-    <tr>
-        <th>Rot13:</th>
-        <th>{{ rot13_output }}</th>
-    </tr>
-    <tr>
-        <th>Caesar:</th>
-        <th>{{ caesar_output }}</th>
-    </tr>
 </table>
 {% endif %}
 

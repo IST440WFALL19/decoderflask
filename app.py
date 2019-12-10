@@ -137,6 +137,16 @@ def upload_page():
                 # deleted_action = q.enqueue(ocr,filepath)
                 caesaroutput = caesar_decipher(imagetext)[0]
                 print("Found caesar matchs: {0}".format(caesaroutput))
+                
+                # Translate the caeser text to english
+                transtext = translate(caesaroutput)
+                # Get output of text (best guess)
+                transorigin = transtext.text
+                # Get original language of text
+                transsrc = transtext.src
+                # Get language translaged to (En)
+                transdest = transtext.dest
+                
                 #returntext = "origin: {0}   </ br > src: {1}  </ br >  dest: {2}     ".format(transorigin, transsrc,transdest)
                 return render_template('results.html', transsrc=transsrc, transdest=transdest, transwords=transorigin, title='Cracking The Code', imagetext=imagetext, version=VERSION, login=False,  username=str(escape(session['username'])), rot13_output=rot13output, caesar_output=caesaroutput)
             else:
