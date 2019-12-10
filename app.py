@@ -240,15 +240,15 @@ def englishMatch(sentance):
                     total_match += 1
         except:
             pass
-    print("total number words: {0}".format(total_num_words))
-    print("total matched words: {0}".format(total_match))
+    # print("total number words: {0}".format(total_num_words))
+    # print("total matched words: {0}".format(total_match))
     # return the percentage of english words
     try:
         matchpercent = (total_match/total_num_words) * 100
     except ZeroDivisionError:
         matchpercent = 0.0
         
-    # print("englishMatch: {0}".format(matchpercent))
+    print("englishMatch: {0}".format(matchpercent))
     return matchpercent
     
 def translate(text):
