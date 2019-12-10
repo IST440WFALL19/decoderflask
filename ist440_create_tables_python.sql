@@ -6,6 +6,17 @@
 --create database code_crack; 
 --attach database code_crack <<expr>> as xxxx; 
 
+
+import time
+import sqlite3
+conn = sqlite3.connect('code_crack_data.db')
+
+c = conn.cursor()
+
+def createDB(c):
+	# Create Database
+	c.execute('''CREATE TABLE sensors(id INTEGER PRIMARY KEY ASC, name varchar(250) NOT NULL, sensor_id varchar(250) NOT NULL)''')
+
 --person
 drop table code_crack.main.person; 
 
