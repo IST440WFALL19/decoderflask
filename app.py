@@ -131,7 +131,7 @@ def upload_page():
 
                 # print("transtext: {}".format(transtext))
                 # TODO Before sending the text to the deciphering functions, we should pull out all of the numbers so it's just A-Z, a-z, special chars left.
-                cleantext = " ".join(re.findall(r"[a-zA-Z0-9]+", transtext.text))
+                cleantext = " ".join(re.findall(r"[a-zA-Z0-9]+", imagetext.text))
                 # Try a rot13 decipher
                 rot13output = rot13_decipher(cleantext)
                 print("rot13 output: {0}".format(rot13output))
