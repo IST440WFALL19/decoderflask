@@ -130,13 +130,13 @@ def upload_page():
                 transdest = transtext.dest
                 print("transtext: {}".format(transtext))
                 # TODO Before sending the text to the deciphering functions, we should pull out all of the numbers so it's just A-Z, a-z, special chars left.
-                cleantext = " ".join(re.findall(r"[a-zA-Z0-9]+", k))
+                cleantext = " ".join(re.findall(r"[a-zA-Z0-9]+", transtext))
                 # Try a rot13 decipher
-                rot13output = rot13_decipher(imagetext)
+                rot13output = rot13_decipher(cleantext)
                 print("rot13 output: {0}".format(rot13output))
                 # Run background task
                 # deleted_action = q.enqueue(ocr,filepath)
-                caesaroutput = caesar_decipher(imagetext)[0]
+                caesaroutput = caesar_decipher(cleantext)[0]
                 print("Found caesar matchs: {0}".format(caesaroutput))
                 
                 # Translate the caeser text to english
