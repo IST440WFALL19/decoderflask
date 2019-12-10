@@ -230,7 +230,7 @@ def englishMatch(sentance):
     # if translate is also matches words below
     # For each word in the sentance
     for word in en_sentance.split():
-        # print("Checking word: {0}".format(word))
+        print("Checking word: {0}".format(word))
         # Check for words in word list
         with open(WORD_LIST) as f:
             if word in f.read():
