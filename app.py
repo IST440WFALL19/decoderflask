@@ -225,7 +225,7 @@ def englishMatch(sentance):
     
     # translate sentance here
     # check output translation for english words
-    en_sentance = translate(sentance).text
+    en_sentance = translate(sentance).text.encode('utf-8').strip()
     print("Checking sentance: {}".format(en_sentance))
     # if translate is also matches words below
     # For each word in the sentance
