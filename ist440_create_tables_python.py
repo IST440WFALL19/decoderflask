@@ -53,41 +53,32 @@ def createDB(c):
         received_from_module_id integer references code_crack.main.zref_modules(module_id), transposition_decipher varchar(250), date_added timestamp, 
         date_updated timestamp, decryption_technique_cd integer references code_crack.main.zref_decryption_technique(decryption_technique_cd))''')
     #--zref_security_level
-drop table code_crack.main.zref_security_level; 
+    c.execute('''create table code_crack.main.zref_security_level if not exists (security_level_cd integer primary key asc, name varchar(250),
+        date_added timestamp, date_updated timestamp)''')
+    #--zref_modules
+    c.execute('''create table code_crack.main.zref_modules if not exists (module_id integer primary key asc, name varchar(250), 
+        date_added timestamp, date_updated timestamp)''')
+    #--zref_language_technique
+    c.execute('''create table code_crack.main.zref_language_technique if not exists (language_technique_cd integer primary key asc, name varchar(250), 
+        date_added timestamp, date_updated timestamp)''')
+    #--zref_decryption_technique
+    c.execute('''create table code_crack.main.zref_decryption_technique if not exists (decryption_technique_cd integer primary key asc, name varchar(250), 
+        date_added timestamp, date_updated timestamp)''')
 
-create table code_crack.main.zref_security_level if not exists (
-	security_level_cd integer primary key asc, 
-	name varchar(250),
-	date_added timestamp, 
-	date_updated timestamp
-); 
+createDB(c)
+conn.commit()
 
---zref_modules
-drop table code_crack.main.zref_modules; 
+c.execute('SELECT * FROM person')
+print c.fetchall()
+c.execute('SELECT * FROM image')
+print c.fetchall()
 
-create table code_crack.main.zref_modules if not exists (
-	module_id integer primary key asc, 
-	name varchar(250), 
-	date_added timestamp, 
-	date_updated timestamp
-); 
+conn.close()
 
---zref_language_technique
-drop table code_crack.main.zref_language_technique; 
 
-create table code_crack.main.zref_language_technique if not exists (
-	language_technique_cd integer primary key asc, 
-	name varchar(250), 
-	date_added timestamp, 
-	date_updated timestamp
-); 
 
---zref_decryption_technique
-drop table code_crack.main.zref_decryption_technique; 
+# curl -i -H "Content-Type: application/json" -X PUT -d '{"id":"null", "min":"20", "max":"50", "sensor_id":60, "datetime":"current_timestamp"}' http://127.0.0.1/sensorconfig/60
 
-create table code_crack.main.zref_decryption_technique if not exists (
-	decryption_technique_cd integer primary key asc, 
-	name varchar(250), 
-	date_added timestamp, 
-	date_updated timestamp
-); 
+# curl http://127.0.0.1/sensors
+
+# http://127.0.0.1/sensorconfig/60
