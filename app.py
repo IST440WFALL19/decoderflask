@@ -119,18 +119,7 @@ def upload_page():
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 # Translate image to text with OCR function
                 imagetext = ocr(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
-                # # Translate the image text to english
-                # transtext = translate(imagetext)
-                # # Get output of text (best guess)
-                # transorigin = transtext.text
-                # # Get original language of text
-                # transsrc = transtext.src
-                # # Get language translaged to (En)
-                # transdest = transtext.dest
-
-                # print("transtext: {}".format(transtext))
-                # TODO Before sending the text to the deciphering functions, we should pull out all of the numbers so it's just A-Z, a-z, special chars left.
+                # Before sending the text to the deciphering functions, we should pull out all of the numbers so it's just A-Z, a-z, special chars left.
                 cleantext = " ".join(re.findall(r"[a-zA-Z0-9]+", imagetext))
                 try:
                     # Try a rot13 decipher
