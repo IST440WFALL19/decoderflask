@@ -10,7 +10,7 @@ MarkupSafe==1.1.1
 Pillow==9.3.0
 pytesseract==0.3.0
 redis==4.5.4
-requests==2.22.0
+requests==2.31.0
 rq==1.1.0
 secretpy==0.8.0
 urllib3==1.26.5
