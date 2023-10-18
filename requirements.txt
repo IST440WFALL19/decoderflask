@@ -14,5 +14,5 @@ requests==2.31.0
 rq==1.1.0
 secretpy==0.8.0
 Werkzeug==2.2.3
-urllib3==1.26.17
+urllib3==1.26.18
 uWSGI==2.0.22
